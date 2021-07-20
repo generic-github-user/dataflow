@@ -54,3 +54,14 @@ class DataChain:
                 v.inputs.insert(0, self.values[self.values.index(v)-v.i])
         
 D = DataChain
+
+node_id = 0
+def savefig(x):
+    plt.close('all')
+    fig = plt.figure()
+    ax = fig.add_subplot()
+    ax.imshow(x)
+    path = f'cache/node_img_{node_id}.svg'
+    plt.axis('off')
+    plt.savefig(path)
+    return path
