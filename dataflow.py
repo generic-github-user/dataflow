@@ -84,3 +84,11 @@ class Node:
         self.id = uuid.uuid4().hex
         self.op = None
         self.data = data
+    
+    def set_graph(self, g):
+        self.graph = g
+        if self not in g.nodes:
+            g.nodes.append(self)
+        for i in self.inputs:
+            i.set_graph(g)
+        return self
