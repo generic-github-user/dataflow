@@ -32,3 +32,25 @@ class DataChain:
         self.namedvalues = namedvalues
 #         self.aux
         self.nodes = []
+        
+#         for v in range(len(self.values)):
+        for iv, v in enumerate(self.values):
+            if type(v) not in [N, Node]:
+                self.values[iv] = N(data=v)
+            self.values[iv].set_graph(self)
+            
+#         for iv, v in enumerate(self.nodes):
+#             if type(v) not in [N, Node]:
+#                 self.nodes[iv] = N(data=v)
+        
+#         for i in range(len(self.values)):
+#             for r in self.values[i].inputs:
+#                 self.values.insert(i, r)
+#                 i -= 1
+        
+        for iv, v in enumerate(self.nodes):
+#             if type(v) in [N, Node]:
+            if v.i is not None:
+                v.inputs.insert(0, self.values[self.values.index(v)-v.i])
+        
+D = DataChain
