@@ -92,3 +92,13 @@ class Node:
         for i in self.inputs:
             i.set_graph(g)
         return self
+    
+    def add_input(self, n):
+        if type(n) in [list, tuple]:
+            for ni in n:
+                self.add_input(ni)
+        else:
+            if type(n) not in [N, Node]:
+                n = N(data=n)
+            self.inputs.append(n)
+        return self
