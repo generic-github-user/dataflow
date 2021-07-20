@@ -76,3 +76,11 @@ flow = [
 #     D(N(np.random.normal(0, 1, [50, 50])) * )
 #     D(a=R.n(0,1,[20]*2))
 ]
+
+class Node:
+    def __init__(self, i=None, data=None):
+        self.i = i
+        self.inputs = []
+        self.id = uuid.uuid4().hex
+        self.op = None
+        self.data = data
