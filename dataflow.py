@@ -65,3 +65,14 @@ def savefig(x):
     plt.axis('off')
     plt.savefig(path)
     return path
+
+class R:
+    pass
+for r in ['normal']:
+    setattr(R, r[0], getattr(np.random, r))
+
+flow = [
+#     D(R.n(0, 1, [20]*2), (np.power, , 2))
+#     D(N(np.random.normal(0, 1, [50, 50])) * )
+#     D(a=R.n(0,1,[20]*2))
+]
