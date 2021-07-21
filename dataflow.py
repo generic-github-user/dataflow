@@ -120,3 +120,9 @@ def magic_method(func):
             self.add_input(args)
             return self
         return M
+for a, b in opnames.items():
+    if callable(b):
+        opfunc = b
+    else:
+        opfunc = getattr(np, b)
+    setattr(Node, f'__{a}__', magic_method(opfunc))
