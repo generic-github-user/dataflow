@@ -113,3 +113,10 @@ opnames = {
     'mul': lambda q: np.prod(q, axis=0),
     'add': lambda q: np.sum(q, axis=0),
 }
+def magic_method(func):
+        def M(self, *args):
+            self.op = func
+            print(args)
+            self.add_input(args)
+            return self
+        return M
