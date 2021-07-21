@@ -152,3 +152,24 @@ for f in flow:
         if v.op and len(v.inputs)>0:
 #             print([I.data if type(I) is Node else I for I in v.inputs])
             v.data = v.op([I.data if type(I) in [Node, N] else I for I in v.inputs])
+        
+#         print(type(v), type(prev), v.data)
+        if type(v.data) is np.ndarray:
+            p = savefig(v.data)
+            meta = {
+                'size': 50
+            }
+#             meta['image'] = 'file:///'+p[:].replace('/','\\')
+            meta['image'] = p#[:].replace('/','\\')
+            meta['shape'] = 'image'
+            meta['label'] = 'I'
+        
+#         print(type(v.id))
+#         print(meta)
+    
+        if type(v.data) in [int, float, str, bool]:
+            meta = {
+                'label': v.data
+            }
+        vis.add_node(n_id=v.id, **meta)
+        node_id += 1
