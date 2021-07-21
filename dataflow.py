@@ -173,3 +173,44 @@ for f in flow:
             }
         vis.add_node(n_id=v.id, **meta)
         node_id += 1
+    for v in f.values:
+        for i in v.inputs:
+            if type(i.data) in [int, float, str, bool]:
+                meta = {
+                    'label': i.data
+                }
+            if not i.id in vis.node_ids:
+                vis.add_node(n_id=i.id, **meta)
+            vis.add_edge(i.id, v.id, smooth=True)
+    
+        
+        prev = v
+
+# vis.show('./graphvis.html')
+vis.save_graph('./graphvis.html')
+
+
+# In[180]:
+
+
+([s.data for s in flow[0].values[1].inputs])
+
+
+# In[154]:
+
+
+[list(map(type,v.inputs)) for v in flow[0].values]
+
+
+# In[108]:
+
+
+# ...
+# _a
+
+
+# In[ ]:
+
+
+
+
