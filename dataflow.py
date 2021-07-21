@@ -125,10 +125,16 @@ class Node:
 #         self.add_input(n)
 #         return self
 
+def power(q):
+#     print(len(q))
+    return np.power(*q)
 opnames = {
-    'pow': lambda q: np.power(*q),
+    'pow': power,
     'mul': lambda q: np.prod(q, axis=0),
     'add': lambda q: np.sum(q, axis=0),
+    'sub': lambda q: np.sub(q, axis=0),
+    'mod': lambda q: np.mod(q, axis=0),
+    'gt': lambda a: np.max(a[0],a[1]),
 }
 def magic_method(func):
         def M(self, *args):
@@ -145,6 +151,34 @@ for a, b in opnames.items():
     setattr(Node, f'__{a}__', magic_method(opfunc))
 
 N = Node
+
+
+# In[487]:
+
+
+R.n(0,1,[4]*2)._.__mul__
+
+
+# In[488]:
+
+
+R.n(0,1,[4]*2)._*5
+
+
+# In[489]:
+
+
+len(flow[0].values[2].inputs)
+
+
+# In[490]:
+
+
+N(1)**2
+
+
+# In[493]:
+
 
 flow = [
     D(R.n(0, 1, [20]*2), N(1)**3, N(1)**3)
