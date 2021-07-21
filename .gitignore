@@ -1,4 +1,5 @@
 cache/*
+img_cache/*
 graphvis.html
 
 # Byte-compiled / optimized / DLL files
