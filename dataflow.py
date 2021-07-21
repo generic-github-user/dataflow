@@ -77,6 +77,23 @@ flow = [
 #     D(a=R.n(0,1,[20]*2))
 ]
 
+
+# In[422]:
+
+
+class Overloader:
+    def __init__(self, obj, **methods):
+        self.obj = obj
+#         for i, j in methods.items():
+#             setattr(self, f'__{i}__', j)
+
+    def __mul__(self, n):
+        return [self.obj.gen() for l in range(n)]
+
+
+# In[486]:
+
+
 class Node:
     def __init__(self, i=None, data=None):
         self.i = i
