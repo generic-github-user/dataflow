@@ -95,12 +95,23 @@ class Overloader:
 
 
 class Node:
-    def __init__(self, i=None, data=None):
+    def __init__(self, i=None, data=None, graph=None, pos=None, gen=None):
         self.i = i
         self.inputs = []
+        self.outputs = []
         self.id = uuid.uuid4().hex
         self.op = None
         self.data = data
+        self.graph = graph
+        self.pos = pos
+        self.gen = gen
+#         self._ = Overloader(self, mul=lambda s, n: [self.gen() for l in range(n)])
+        self._ = Overloader(
+            self,
+#             mul=lambda s, n: [s.obj.gen() for l in range(n)]
+        )
+        
+#         self.update_inputs()
     
     def set_graph(self, g):
         self.graph = g
