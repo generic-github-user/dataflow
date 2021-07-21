@@ -126,3 +126,29 @@ for a, b in opnames.items():
     else:
         opfunc = getattr(np, b)
     setattr(Node, f'__{a}__', magic_method(opfunc))
+
+N = Node
+
+flow = [
+    D(R.n(0, 1, [20]*2), N(1)**3, N(1)**3)
+]
+
+vis = pyvis.network.Network(width=1000, height=1000, notebook=True, directed=True)
+for f in flow:
+    prev = None
+    for v in f.values:
+        meta = {
+            'label': v.data
+        }
+        if type(v) in [list, tuple]:
+            print(True)
+            if prev is not None:
+                args = list(v[2:])
+                if type(args) not in [list, tuple]:
+                    args = [args]
+                v = N(data=v[0](prev,*args))
+        
+        print([type(v_.data) for v_ in v.inputs])
+        if v.op and len(v.inputs)>0:
+#             print([I.data if type(I) is Node else I for I in v.inputs])
+            v.data = v.op([I.data if type(I) in [Node, N] else I for I in v.inputs])
