@@ -102,3 +102,14 @@ class Node:
                 n = N(data=n)
             self.inputs.append(n)
         return self
+    
+#     def __pow__(self, n):
+#         self.op = np.power
+#         self.add_input(n)
+#         return self
+
+opnames = {
+    'pow': lambda q: np.power(*q),
+    'mul': lambda q: np.prod(q, axis=0),
+    'add': lambda q: np.sum(q, axis=0),
+}
